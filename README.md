@@ -1,6 +1,6 @@
 # Faro
 
-[![Tests](https://github.com/scheffan/faro/actions/workflows/tests.yml/badge.svg)](https://github.com/scheffan/faro/actions/workflows/tests.yml)
+[![Tests](https://github.com/scheffan/g-faro/actions/workflows/tests.yml/badge.svg)](https://github.com/scheffan/g-faro/actions/workflows/tests.yml)
 
 Plataformero 2D de un nivel hecho en **Godot 4.7**, con **tests automáticos en GUT** que corren en **GitHub Actions** sin pantalla (Godot headless).
 
@@ -12,7 +12,7 @@ El proyecto está pensado como pieza de portfolio de **QA técnico y game testin
 
 | Jugando | Victoria | Game over |
 |---|---|---|
-| ![Jugando](docs/capturas/04-juego-pinchos.png) | ![Victoria](docs/capturas/05-victoria.png) | ![Game over](docs/capturas/06-game-over.png) |
+| ![Jugando](docs/capturas/03-juego-pinchos.png) | ![Victoria](docs/capturas/04-victoria.png) | ![Game over](docs/capturas/05-game-over.png) |
 
 ## Cómo jugar
 
@@ -42,6 +42,18 @@ godot --headless --path . -s addons/gut/gut_cmdln.gd
 ```
 
 También se pueden correr desde el editor, en el panel **GUT** de abajo. La configuración está en `.gutconfig.json` y los resultados quedan en `resultados-tests.xml` (formato JUnit).
+
+![Los 40 tests en verde desde VS Code](docs/capturas/10-tests-en-vscode.png)
+
+Otros comandos útiles:
+
+```bash
+# Ver al bot jugar el nivel completo
+godot --path . -- --demo
+
+# Regenerar las capturas del juego en docs/capturas
+godot --path . -s tools/capturar_demo.gd
+```
 
 ## Estructura
 
@@ -176,6 +188,16 @@ Todos los bugs fueron detectados.
 2. Importa el proyecto en modo headless.
 3. Corre todos los tests con GUT. Si alguno falla, el workflow falla.
 4. Sube `resultados-tests.xml` como artefacto y muestra el resumen en la pestaña del workflow.
+
+## Capturas del proceso
+
+| Tests corriendo en el editor | Resultado: 40 de 40 |
+|---|---|
+| ![Tests corriendo](docs/capturas/08-tests-corriendo-en-godot.png) | ![Tests en verde](docs/capturas/09-tests-en-verde-godot.png) |
+
+| Partida de prueba | Victoria |
+|---|---|
+| ![Jugando sobre el editor](docs/capturas/06-jugando-sobre-el-editor.png) | ![Victoria sobre el editor](docs/capturas/07-victoria-sobre-el-editor.png) |
 
 ## Herramientas
 

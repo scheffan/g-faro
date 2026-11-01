@@ -28,6 +28,9 @@ func _ready() -> void:
 	state.light_changed.connect(_on_light_changed)
 	state.game_over.connect(_on_game_over)
 	state.won.connect(_on_won)
+	# Modo demo: godot --path . -- --demo
+	if "--demo" in OS.get_cmdline_user_args():
+		add_child(Autopilot.new(self))
 
 
 func _physics_process(delta: float) -> void:

@@ -17,13 +17,13 @@ func _run() -> void:
 	main = _new_game()
 	main.add_child(Autopilot.new(main))
 	await create_timer(3.0).timeout
-	await _save("03-juego-inicio.png")
+	await _save("02-juego-inicio.png")
 	await create_timer(4.5).timeout
-	await _save("04-juego-pinchos.png")
+	await _save("03-juego-pinchos.png")
 	while main.state.is_playing():
 		await physics_frame
 	await create_timer(1.0).timeout
-	await _save("05-victoria.png")
+	await _save("04-victoria.png")
 	main.queue_free()
 	await process_frame
 
@@ -34,7 +34,7 @@ func _run() -> void:
 	while main.state.is_playing():
 		await physics_frame
 	await create_timer(0.8).timeout
-	await _save("06-game-over.png")
+	await _save("05-game-over.png")
 	quit()
 
 
