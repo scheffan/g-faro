@@ -1,0 +1,61 @@
+name: Tests
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  checks: write
+  actions: read
+
+env:
+  GODOT_VERSION: 4.7.2
+
+jobs:
+  gut:
+    name: GUT (Godot headless)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Cache de Godot
+        id: cache-godot
+        uses: actions/cache@v4
+        with:
+          path: ~/godot
+          key: godot-${{ env.GODOT_VERSION }}
+
+      - name: Descargar Godot
+        if: steps.cache-godot.outputs.cache-hit != 'true'
+        run: |
+          mkdir -p ~/godot
+          curl -sSL -o godot.zip "https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}-stable/Godot_v${GODOT_VERSION}-stable_linux.x86_64.zip"
+          unzip -q godot.zip -d ~/godot
+          mv ~/godot/Godot_v${GODOT_VERSION}-stable_linux.x86_64 ~/godot/godot
+
+      - name: Importar el proyecto
+        run: ~/godot/godot --headless --path . --import
+
+      - name: Correr los tests
+        run: ~/godot/godot --headless --path . -s addons/gut/gut_cmdln.gd
+
+      - name: Publicar resultados
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: resultados-tests
+          path: resultados-tests.xml
+          if-no-files-found: warn
+
+      - name: Resumen en la página del workflow
+        if: always()
+        uses: dorny/test-reporter@v1
+        with:
+          name: Resultados GUT
+          path: resultados-tests.xml
+          reporter: java-junit
+          fail-on-error: false

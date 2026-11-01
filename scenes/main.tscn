@@ -1,0 +1,159 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_main"]
+[ext_resource type="Script" path="res://scripts/game_state.gd" id="2_state"]
+[ext_resource type="Script" path="res://scripts/background.gd" id="3_bg"]
+[ext_resource type="Script" path="res://scripts/platform.gd" id="4_platform"]
+[ext_resource type="Script" path="res://scripts/spikes.gd" id="5_spikes"]
+[ext_resource type="Script" path="res://scripts/drop.gd" id="6_drop"]
+[ext_resource type="Script" path="res://scripts/lighthouse.gd" id="7_lighthouse"]
+[ext_resource type="PackedScene" path="res://scenes/player.tscn" id="8_player"]
+[ext_resource type="Script" path="res://scripts/hud.gd" id="9_hud"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_main")
+
+[node name="GameState" type="Node" parent="."]
+script = ExtResource("2_state")
+
+[node name="Background" type="Node2D" parent="."]
+script = ExtResource("3_bg")
+
+[node name="Level" type="Node2D" parent="."]
+
+[node name="Walls" type="Node2D" parent="Level"]
+
+[node name="WallLeft" type="StaticBody2D" parent="Level/Walls"]
+position = Vector2(-40, -300)
+script = ExtResource("4_platform")
+size = Vector2(40, 840)
+
+[node name="WallRight" type="StaticBody2D" parent="Level/Walls"]
+position = Vector2(3200, -300)
+script = ExtResource("4_platform")
+size = Vector2(40, 840)
+
+[node name="Platforms" type="Node2D" parent="Level"]
+
+[node name="Start" type="StaticBody2D" parent="Level/Platforms"]
+position = Vector2(0, 460)
+script = ExtResource("4_platform")
+size = Vector2(600, 80)
+
+[node name="Step1" type="StaticBody2D" parent="Level/Platforms"]
+position = Vector2(700, 400)
+script = ExtResource("4_platform")
+size = Vector2(200, 24)
+
+[node name="Step2" type="StaticBody2D" parent="Level/Platforms"]
+position = Vector2(980, 340)
+script = ExtResource("4_platform")
+size = Vector2(160, 24)
+
+[node name="Middle" type="StaticBody2D" parent="Level/Platforms"]
+position = Vector2(1220, 460)
+script = ExtResource("4_platform")
+size = Vector2(500, 80)
+
+[node name="Step3" type="StaticBody2D" parent="Level/Platforms"]
+position = Vector2(1800, 400)
+script = ExtResource("4_platform")
+size = Vector2(140, 24)
+
+[node name="Step4" type="StaticBody2D" parent="Level/Platforms"]
+position = Vector2(2020, 340)
+script = ExtResource("4_platform")
+size = Vector2(140, 24)
+
+[node name="Step5" type="StaticBody2D" parent="Level/Platforms"]
+position = Vector2(2240, 400)
+script = ExtResource("4_platform")
+size = Vector2(140, 24)
+
+[node name="End" type="StaticBody2D" parent="Level/Platforms"]
+position = Vector2(2460, 460)
+script = ExtResource("4_platform")
+size = Vector2(740, 80)
+
+[node name="Hazards" type="Node2D" parent="Level"]
+
+[node name="SpikesMiddle" type="Area2D" parent="Level/Hazards"]
+position = Vector2(1420, 460)
+script = ExtResource("5_spikes")
+width = 64.0
+
+[node name="SpikesEnd" type="Area2D" parent="Level/Hazards"]
+position = Vector2(2700, 460)
+script = ExtResource("5_spikes")
+width = 96.0
+
+[node name="Drops" type="Node2D" parent="Level"]
+
+[node name="Drop1" type="Area2D" parent="Level/Drops"]
+position = Vector2(300, 442)
+script = ExtResource("6_drop")
+
+[node name="Drop2" type="Area2D" parent="Level/Drops"]
+position = Vector2(520, 442)
+script = ExtResource("6_drop")
+
+[node name="Drop3" type="Area2D" parent="Level/Drops"]
+position = Vector2(800, 360)
+script = ExtResource("6_drop")
+
+[node name="Drop4" type="Area2D" parent="Level/Drops"]
+position = Vector2(1060, 300)
+script = ExtResource("6_drop")
+
+[node name="Drop5" type="Area2D" parent="Level/Drops"]
+position = Vector2(1300, 442)
+script = ExtResource("6_drop")
+
+[node name="Drop6" type="Area2D" parent="Level/Drops"]
+position = Vector2(1452, 380)
+script = ExtResource("6_drop")
+
+[node name="Drop7" type="Area2D" parent="Level/Drops"]
+position = Vector2(1650, 442)
+script = ExtResource("6_drop")
+
+[node name="Drop8" type="Area2D" parent="Level/Drops"]
+position = Vector2(1870, 360)
+script = ExtResource("6_drop")
+
+[node name="Drop9" type="Area2D" parent="Level/Drops"]
+position = Vector2(2090, 300)
+script = ExtResource("6_drop")
+
+[node name="Drop10" type="Area2D" parent="Level/Drops"]
+position = Vector2(2310, 360)
+script = ExtResource("6_drop")
+
+[node name="Drop11" type="Area2D" parent="Level/Drops"]
+position = Vector2(2600, 442)
+script = ExtResource("6_drop")
+
+[node name="Drop12" type="Area2D" parent="Level/Drops"]
+position = Vector2(2748, 380)
+script = ExtResource("6_drop")
+
+[node name="Drop13" type="Area2D" parent="Level/Drops"]
+position = Vector2(2900, 442)
+script = ExtResource("6_drop")
+
+[node name="Lighthouse" type="Area2D" parent="Level"]
+position = Vector2(3080, 460)
+script = ExtResource("7_lighthouse")
+
+[node name="Player" parent="." instance=ExtResource("8_player")]
+position = Vector2(80, 440)
+
+[node name="Camera" type="Camera2D" parent="Player"]
+limit_left = 0
+limit_top = -200
+limit_right = 3200
+limit_bottom = 640
+position_smoothing_enabled = true
+
+[node name="HUD" type="CanvasLayer" parent="."]
+script = ExtResource("9_hud")

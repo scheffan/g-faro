@@ -1,0 +1,4 @@
+.godot/
+*.tmp
+test-results/
+resultados-tests.xml
